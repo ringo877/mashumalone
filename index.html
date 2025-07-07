@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 🔒 パスワード入力画面 -->
+  <!-- 🔒 パスワード入力 -->
   <div id="lock" class="lock-layer">
     <h2>🔐 パスワードを入れてね！</h2>
     <input type="password" id="pw" placeholder="Password">
@@ -18,57 +18,83 @@
   <!-- 🎬 イントロ動画レイヤー -->
   <div id="introVideo" class="intro-layer">
     <button id="skipIntro">Skip</button>
-    <video id="birthdayVideo" playsinline width="720" preload="auto">
+    <video id="birthdayVideo" playsinline preload="auto" width="720">
       <source src="assets/maho_video.mp4" type="video/mp4">
-      お使いのブラウザーでは動画を再生できません。
     </video>
   </div>
 
   <!-- ▼ 本編 -->
   <div id="content" hidden>
+    <!-- ① タイトル (サイト最上部) -->
     <header id="siteHeader" class="hide-before">
       <h1>🎉 まほちゃん誕生日特設サイト 🎉</h1>
       <h2>〜26歳の君へ愛を込めて〜</h2>
     </header>
 
+    <!-- HERO ギャラリー -->
+    <section id="heroGallery" class="hero-gallery hide-before">
+      <img src="assets/photos/memory1.jpg" alt="思い出1" class="active">
+      <img src="assets/photos/memory2.jpg" alt="思い出2">
+    </section>
+
+    <!-- メイン領域 -->
     <main id="mainArea" class="hide-before">
       <section id="greeting">
         <p>まほちゃん、26歳のお誕生日おめでとう！<br>
-           いつも笑顔をありがとう。これからの一年も、キラキラ輝く素敵な時間になりますように。</p>
+           いつも笑顔をありがとう。これからの一年もキラキラ輝く素敵な時間になりますように。</p>
       </section>
 
+      <!-- メッセージエリア -->
       <section id="message">
         <h3>🎂 メッセージ 🎂</h3>
         <p>
-          中学で出会ってから早10年。<br>
+          中学で出会ってから早十数年。<br>
           勉強も遊びも、泣いた日も笑った日も、一緒に乗り越えてきたね。<br>
           これから先も変わらず、最高の親友でいてください！<br>
           <span class="from">―― 友人一同より</span>
         </p>
       </section>
 
+      <!-- ② お祝いソングエリア -->
+      <section id="songs">
+        <h3>🎵 お祝いソング集 🎵</h3>
+        <ul class="song-list">
+          <li>
+            <span>まほちゃんの誕生日</span>
+            <span>作詞・作曲：Suno</span>
+            <audio controls preload="auto">
+              <source src="assets/maho_song.mp3" type="audio/mpeg">
+            </audio>
+          </li>
+          <li>
+            <span>まほちゃんに告白しようと思ってる</span>
+            <span>作詞：あやの（feat.ぺこーらに告白しようと思ってるスレ民）　作曲：Suno</span>
+            <audio controls preload="auto">
+              <source src="assets/maho_song2.mp3" type="audio/mpeg">
+            </audio>
+          </li>
+          <!-- 必要に応じて li を追加 -->
+        </ul>
+      </section>
+
       <section id="video">
         <h3>📽️ お祝いムービー 📽️</h3>
-        <video controls width="100%" poster="assets/photos/memory1.jpg" playsinline>
+        <video id="mainVideo" controls playsinline width="100%">
           <source src="assets/maho_video.mp4" type="video/mp4">
-          お使いのブラウザーでは動画を再生できません。
         </video>
       </section>
 
-      <section id="gallery">
-        <h3>📸 思い出アルバム 📸</h3>
-        <div class="photos">
-          <img src="assets/photos/memory1.jpg" alt="思い出の写真1">
-          <img src="assets/photos/memory2.jpg" alt="思い出の写真2">
-        </div>
-      </section>
+      <footer>
+        <hr>
+        <p><small>Copyright 2025 Ayano</small></p>
+        <p><small>作成日：<time>2025-07-07</time>　
+          更新日：<time>2025-07-07</time></small></p>
+      </footer>  
     </main>
   </div>
 
-  <!-- ♪ BGM -->
-  <audio id="bgm" loop preload="auto">
-    <source src="assets/maho_song.mp3" type="audio/mpeg">
-  </audio>
+  <!-- ♪ BGM (自動再生用) -->
+  <audio id="bgm" loop preload="auto"><source src="assets/maho_song.mp3" type="audio/mpeg"></audio>
   <button id="play-btn">♪ BGM</button>
 
   <script src="script.js"></script>
