@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>まほちゃん誕生日特設サイト 〜26歳の君へ愛を込めて〜</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎉 まほちゃん誕生日特設サイト 🎉</h1>
+    <h2>〜26歳の君へ愛を込めて〜</h2>
+  </header>
+
+  <!-- 誕生日を祝う文言 -->
+  <section id="greeting">
+    <p>まほちゃん、26歳のお誕生日おめでとう！<br>
+       いつも笑顔をありがとう。これからの一年も、まほちゃんにとって
+       キラキラ輝く素敵な時間になりますように。</p>
+  </section>
+
+  <!-- 個別メッセージ -->
+  <section id="message">
+    <h3>🎂 メッセージ 🎂</h3>
+    <p>
+      中学で出会ってから早10年。<br>
+      勉強も遊びも、泣いた日も笑った日も、一緒に乗り越えてきたね。<br>
+      これから先も変わらず、最高の親友でいてください！<br>
+      <span class="from">―― 友人一同より</span>
+    </p>
+  </section>
+
+  <!-- お祝い動画 -->
+  <section id="video">
+    <h3>📽️ お祝いムービー 📽️</h3>
+    <video controls poster="assets/photos/memory1.jpg" width="720">
+      <source src="assets/maho_video.mp4" type="video/mp4">
+      お使いのブラウザーでは動画を再生できません。
+    </video>
+  </section>
+
+  <!-- 思い出写真ギャラリー -->
+  <section id="gallery">
+    <h3>📸 思い出アルバム 📸</h3>
+    <div class="photos">
+      <img src="assets/photos/memory1.jpg" alt="思い出の写真1">
+      <img src="assets/photos/memory2.jpg" alt="思い出の写真2">
+      <!-- 必要に応じて追加 -->
+    </div>
+  </section>
+
+  <!-- BGM（自動再生はクリック後に開始） -->
+  <audio id="bgm" loop>
+    <source src="assets/maho_song.mp3" type="audio/mpeg">
+    お使いのブラウザーでは音楽を再生できません。
+  </audio>
+  <button id="play-btn">♪ BGM を再生する</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
