@@ -3,84 +3,81 @@
 <head>
   <meta charset="utf-8">
   <title>まほちゃん誕生日特設サイト 〜26歳の君へ愛を込めて〜</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- 🔒 パスワード入力画面 -->
-  <div id="lock">
-    <h2>🔐 パスワードを入れてね！</h2>
+  <div id="lock" class="lock-layer">
+    <h2>🔐 まほちゃんへ – パスワードを入れてね！</h2>
     <input type="password" id="pw" placeholder="Password">
     <button id="enter">OPEN</button>
-    <p id="msg" style="color:red;"></p>
+    <p id="msg"></p>
   </div>
 
-  <!-- 🎬 イントロ動画だけを載せるレイヤー -->
-<div id="introVideo" class="intro-layer">
-    <video id="birthdayVideo" width="720" poster="assets/photos/memory1.jpg">
-    <source src="assets/maho_video.mp4" type="video/mp4">
-    お使いのブラウザーでは動画を再生できません。
-  </video>
-</div>
-
-  <!-- ▼ここに もとの全コンテンツを丸ごと入れる -->
-<div id="content" style="display:none;">
-  <!-- ① タイトルブロック (先に表示) -->
-  <header id="siteHeader" class="hide-before">
-    <h1>🎉 まほちゃん誕生日特設サイト 🎉</h1>
-    <h2>〜26歳の君へ愛を込めて〜</h2>
-  </header>
-    
-  <!-- ② その他コンテンツ (後から表示) -->
-  <main id="mainArea" class="hide-before">
-    
-  <!-- 誕生日を祝う文言 -->
-  <section id="greeting">
-    <p>まほちゃん、26歳のお誕生日おめでとう！<br>
-       いつも笑顔をありがとう。これからの一年も、まほちゃんにとって
-       キラキラ輝く素敵な時間になりますように。</p>
-  </section>
-
-  <!-- 個別メッセージ -->
-  <section id="message">
-    <h3>🎂 メッセージ 🎂</h3>
-    <p>
-      中学で出会ってから早10年。<br>
-      勉強も遊びも、泣いた日も笑った日も、一緒に乗り越えてきたね。<br>
-      これから先も変わらず、最高の親友でいてください！<br>
-      <span class="from">―― 友人一同より</span>
-    </p>
-  </section>
-
-  <!-- お祝い動画 -->
-  <section id="video">
-    <h3>📽️ お祝いムービー 📽️</h3>
-    <video id="birthdayVideo" controls poster="assets/photos/memory1.jpg" width="720">
+  <!-- 🎬 イントロ動画レイヤー（全画面センター）-->
+  <div id="introVideo" class="intro-layer">
+    <video id="birthdayVideo" width="720" preload="auto">
       <source src="assets/maho_video.mp4" type="video/mp4">
       お使いのブラウザーでは動画を再生できません。
     </video>
-  </section>
+  </div>
 
-  <!-- 思い出写真ギャラリー -->
-  <section id="gallery">
-    <h3>📸 思い出アルバム 📸</h3>
-    <div class="photos">
-      <img src="assets/photos/memory1.jpg" alt="思い出の写真1">
-      <img src="assets/photos/memory2.jpg" alt="思い出の写真2">
-      <!-- 必要に応じて追加 -->
-    </div>
-  </section>
-  </main>
+  <!-- ▼ 本編 --------- -->
+  <div id="content" style="display:none;">
+    <!-- ① タイトルだけ先にフェードイン -->
+    <header id="siteHeader" class="hide-before">
+      <h1>🎉 まほちゃん誕生日特設サイト 🎉</h1>
+      <h2>〜26歳の君へ愛を込めて〜</h2>
+    </header>
 
+    <!-- ② メイン領域（後追いでフェードイン） -->
+    <main id="mainArea" class="hide-before">
+      <!-- 誕生日を祝う文言 -->
+      <section id="greeting">
+        <p>まほちゃん、26歳のお誕生日おめでとう！<br>
+           いつも笑顔をありがとう。これからの一年も、キラキラ輝く
+           素敵な時間になりますように。</p>
+      </section>
 
-  <!-- BGM（自動再生はクリック後に開始） -->
+      <!-- メッセージ -->
+      <section id="message">
+        <h3>🎂 メッセージ 🎂</h3>
+        <p>
+          中学で出会ってから早10年。<br>
+          勉強も遊びも、泣いた日も笑った日も、一緒に乗り越えてきたね。<br>
+          これから先も変わらず、最高の親友でいてください！<br>
+          <span class="from">―― 友人一同より</span>
+        </p>
+      </section>
+
+      <!-- 動画（見返し用）-->
+      <section id="video">
+        <h3>📽️ お祝いムービー 📽️</h3>
+        <video controls width="720" poster="assets/photos/memory1.jpg">
+          <source src="assets/maho_video.mp4" type="video/mp4">
+          お使いのブラウザーでは動画を再生できません。
+        </video>
+      </section>
+
+      <!-- 思い出写真 -->
+      <section id="gallery">
+        <h3>📸 思い出アルバム 📸</h3>
+        <div class="photos">
+          <img src="assets/photos/memory1.jpg" alt="思い出の写真1">
+          <img src="assets/photos/memory2.jpg" alt="思い出の写真2">
+          <!-- 追加する場合はここに <img> を増やす -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ♪ BGM（ループ再生） -->
   <audio id="bgm" loop>
     <source src="assets/maho_song.mp3" type="audio/mpeg">
-    お使いのブラウザーでは音楽を再生できません。
   </audio>
-  <button id="play-btn">♪ BGM を再生する</button>
-</div>
-<script src="script.js"></script>
-</body>
+  <button id="play-btn">♪ BGM を再生 / 一時停止</button>
 
+  <script src="script.js"></script>
 </body>
 </html>

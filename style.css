@@ -1,41 +1,137 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
 
-*{ box-sizing:border-box; }
-body{
-  margin:0; padding:0;
-  font-family:"Zen Kurenaido", sans-serif;
-  background:#fff7fb;
-  color:#333;
-  text-align:center;
+/* --------------- 共通 --------------- */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: #000; /* 動画再生中は黒背景 */
+  font-family: "Zen Kurenaido", sans-serif;
+  color: #333;
 }
-header{
-  background:#ffb7e5;
-  color:#fff;
-  padding:2rem 1rem;
-}
-h1{ margin:0; font-size:2rem; }
-h2{ margin:0.5rem 0 0; font-size:1.2rem; }
 
-section{ padding:2rem 1rem; }
-#message{ background:#ffeef8; }
-#from{ display:block; margin-top:1rem; font-style:italic; }
+section {
+  padding: 2rem 1rem;
+  text-align: center;
+}
 
-.photos{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:1rem;
+/* --------------- パスワード画面 --------------- */
+.lock-layer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: #fff;
+  text-align: center;
 }
-.photos img{
-  width:260px; height:180px; object-fit:cover;
-  border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.2);
+
+.lock-layer input {
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+  font-size: 1rem;
 }
-#play-btn{
-  position:fixed; bottom:20px; right:20px;
-  padding:0.8rem 1.2rem;
-  border:none; border-radius:30px;
-  background:#ff6cb5; color:#fff;
-  font-size:1rem; cursor:pointer;
-  box-shadow:0 2px 6px rgba(0,0,0,.3);
+
+.lock-layer button {
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
-#play-btn:hover{ transform:scale(1.05); }
+
+.lock-layer #msg {
+  color: red;
+}
+
+/* --------------- イントロ動画レイヤー --------------- */
+.intro-layer {
+  display: none; /* JS で display:flex に切り替え */
+  position: fixed;
+  inset: 0;
+  background: #000;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* --------------- アニメ的フェードイン --------------- */
+.hide-before {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.show-now {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* --------------- ヘッダー（タイトル）--------------- */
+#siteHeader {
+  background: #fff7fb; /* 本編と馴染む淡いピンク */
+  padding: 3rem 1rem 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+#siteHeader h1 {
+  margin: 0;
+  font-size: 2.4rem;
+}
+
+#siteHeader h2 {
+  margin: 0.5rem 0 0;
+  font-size: 1.4rem;
+  opacity: 0.85;
+}
+
+/* 本編が始まったら淡いピンク背景に戻す */
+body.ready #siteHeader + #mainArea {
+  background: #fff7fb;
+}
+
+/* --------------- 各セクション --------------- */
+#greeting {
+  background: #ffeef8;
+}
+
+.from {
+  display: block;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* 思い出写真 */
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.photos img {
+  width: 260px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* BGM ボタン */
+#play-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 30px;
+  background: #ff6cb5;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+}
+
+#play-btn:hover {
+  transform: scale(1.05);
+}
