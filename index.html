@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>まほちゃん誕生日特設サイト 〜26歳の君へ愛を込めて〜</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,14 +18,14 @@
   <!-- 🎬 イントロ動画レイヤー -->
   <div id="introVideo" class="intro-layer">
     <button id="skipIntro">Skip</button>
-    <video id="birthdayVideo" width="720" preload="auto">
+    <video id="birthdayVideo" playsinline width="720" preload="auto">
       <source src="assets/maho_video.mp4" type="video/mp4">
       お使いのブラウザーでは動画を再生できません。
     </video>
   </div>
 
   <!-- ▼ 本編 -->
-  <div id="content" style="display:none;">
+  <div id="content" hidden>
     <header id="siteHeader" class="hide-before">
       <h1>🎉 まほちゃん誕生日特設サイト 🎉</h1>
       <h2>〜26歳の君へ愛を込めて〜</h2>
@@ -34,8 +34,7 @@
     <main id="mainArea" class="hide-before">
       <section id="greeting">
         <p>まほちゃん、26歳のお誕生日おめでとう！<br>
-           いつも笑顔をありがとう。これからの一年も、キラキラ輝く
-           素敵な時間になりますように。</p>
+           いつも笑顔をありがとう。これからの一年も、キラキラ輝く素敵な時間になりますように。</p>
       </section>
 
       <section id="message">
@@ -50,7 +49,7 @@
 
       <section id="video">
         <h3>📽️ お祝いムービー 📽️</h3>
-        <video controls width="720" poster="assets/photos/memory1.jpg">
+        <video controls width="100%" poster="assets/photos/memory1.jpg" playsinline>
           <source src="assets/maho_video.mp4" type="video/mp4">
           お使いのブラウザーでは動画を再生できません。
         </video>
@@ -67,10 +66,10 @@
   </div>
 
   <!-- ♪ BGM -->
-  <audio id="bgm" loop>
+  <audio id="bgm" loop preload="auto">
     <source src="assets/maho_song.mp3" type="audio/mpeg">
   </audio>
-  <button id="play-btn">♪ BGM を再生 / 一時停止</button>
+  <button id="play-btn">♪ BGM</button>
 
   <script src="script.js"></script>
 </body>
