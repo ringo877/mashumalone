@@ -9,38 +9,35 @@
 <body>
   <!-- 🔒 パスワード入力画面 -->
   <div id="lock" class="lock-layer">
-    <h2>🔐 まほちゃんへ – パスワードを入れてね！</h2>
+    <h2>🔐 パスワードを入れてね！</h2>
     <input type="password" id="pw" placeholder="Password">
     <button id="enter">OPEN</button>
     <p id="msg"></p>
   </div>
 
-  <!-- 🎬 イントロ動画レイヤー（全画面センター）-->
+  <!-- 🎬 イントロ動画レイヤー -->
   <div id="introVideo" class="intro-layer">
+    <button id="skipIntro">Skip</button>
     <video id="birthdayVideo" width="720" preload="auto">
       <source src="assets/maho_video.mp4" type="video/mp4">
       お使いのブラウザーでは動画を再生できません。
     </video>
   </div>
 
-  <!-- ▼ 本編 --------- -->
+  <!-- ▼ 本編 -->
   <div id="content" style="display:none;">
-    <!-- ① タイトルだけ先にフェードイン -->
     <header id="siteHeader" class="hide-before">
       <h1>🎉 まほちゃん誕生日特設サイト 🎉</h1>
       <h2>〜26歳の君へ愛を込めて〜</h2>
     </header>
 
-    <!-- ② メイン領域（後追いでフェードイン） -->
     <main id="mainArea" class="hide-before">
-      <!-- 誕生日を祝う文言 -->
       <section id="greeting">
         <p>まほちゃん、26歳のお誕生日おめでとう！<br>
            いつも笑顔をありがとう。これからの一年も、キラキラ輝く
            素敵な時間になりますように。</p>
       </section>
 
-      <!-- メッセージ -->
       <section id="message">
         <h3>🎂 メッセージ 🎂</h3>
         <p>
@@ -51,7 +48,6 @@
         </p>
       </section>
 
-      <!-- 動画（見返し用）-->
       <section id="video">
         <h3>📽️ お祝いムービー 📽️</h3>
         <video controls width="720" poster="assets/photos/memory1.jpg">
@@ -60,19 +56,17 @@
         </video>
       </section>
 
-      <!-- 思い出写真 -->
       <section id="gallery">
         <h3>📸 思い出アルバム 📸</h3>
         <div class="photos">
           <img src="assets/photos/memory1.jpg" alt="思い出の写真1">
           <img src="assets/photos/memory2.jpg" alt="思い出の写真2">
-          <!-- 追加する場合はここに <img> を増やす -->
         </div>
       </section>
     </main>
   </div>
 
-  <!-- ♪ BGM（ループ再生） -->
+  <!-- ♪ BGM -->
   <audio id="bgm" loop>
     <source src="assets/maho_song.mp3" type="audio/mpeg">
   </audio>

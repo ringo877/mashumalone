@@ -1,13 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
 
-/* --------------- 共通 --------------- */
+/* ========================
+   まほちゃん誕生日サイト — チョコミント配色版 (最新)  
+   ======================== */
+
+/******************* 0. 共通 *******************/
 html,
 body {
   height: 100%;
   margin: 0;
-  background: #000; /* 動画再生中は黒背景 */
+  /* イントロ動画中は真っ黒。本編へ遷移時に JS が body.ready を付与し淡いミントに */
+  background: #000;
   font-family: "Zen Kurenaido", sans-serif;
-  color: #333;
+  color: #004b4f; /* 深めティール */
+}
+
+/* 本編に入ったら淡いミント背景へ */
+body.ready {
+  background: #e6fbfb; /* VERY LIGHT MINT */
 }
 
 section {
@@ -15,14 +25,14 @@ section {
   text-align: center;
 }
 
-/* --------------- パスワード画面 --------------- */
+/******************* 1. パスワード入力画面 *******************/
 .lock-layer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: #fff;
+  background: #d0f4f4; /* ミント */
   text-align: center;
 }
 
@@ -30,21 +40,32 @@ section {
   padding: 0.6rem 1rem;
   margin: 1rem 0;
   font-size: 1rem;
+  border: 2px solid #20c9c9;
+  border-radius: 6px;
+  background: #fff;
 }
 
 .lock-layer button {
   padding: 0.6rem 1.4rem;
   font-size: 1rem;
   cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: #20c9c9; /* フレッシュミント */
+  color: #fff;
+  transition: background 0.2s;
+}
+.lock-layer button:hover {
+  background: #17b2b2;
 }
 
 .lock-layer #msg {
-  color: red;
+  color: #c0392b; /* エラーカラー */
 }
 
-/* --------------- イントロ動画レイヤー --------------- */
+/******************* 2. イントロ動画レイヤー *******************/
 .intro-layer {
-  display: none; /* JS で display:flex に切り替え */
+  display: none;            /* JS で display:flex に */
   position: fixed;
   inset: 0;
   background: #000;
@@ -53,85 +74,105 @@ section {
   z-index: 9999;
 }
 
-/* --------------- アニメ的フェードイン --------------- */
+/***** Skip Intro ボタン *****/
+#skipIntro {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 30px;
+  background: #20c9c9;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  z-index: 10001;
+  box-shadow: 0 2px 6px rgba(0, 100, 100, 0.4);
+  transition: background 0.2s;
+}
+#skipIntro:hover {
+  background: #17b2b2;
+}
+
+/******************* 3. フェードイン演出 *******************/
 .hide-before {
   opacity: 0;
   transform: translateY(40px);
 }
-
 .show-now {
   opacity: 1;
   transform: none;
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* --------------- ヘッダー（タイトル）--------------- */
+/******************* 4. ヘッダー（タイトル）*******************/
 #siteHeader {
-  background: #fff7fb; /* 本編と馴染む淡いピンク */
+  background: #bdf0f0; /* 少し濃いミント */
   padding: 3rem 1rem 1.5rem;
   text-align: center;
-  color: #333;
+  color: #004b4f;
+  box-shadow: 0 2px 10px rgba(0, 75, 79, 0.1);
 }
-
 #siteHeader h1 {
   margin: 0;
-  font-size: 2.4rem;
+  font-size: 2.6rem;
 }
-
 #siteHeader h2 {
   margin: 0.5rem 0 0;
   font-size: 1.4rem;
   opacity: 0.85;
 }
 
-/* 本編が始まったら淡いピンク背景に戻す */
+/* 本編が始まったらヘッダー直下 main 背景をさらに淡く */
 body.ready #siteHeader + #mainArea {
-  background: #fff7fb;
+  background: #e6fbfb;
 }
 
-/* --------------- 各セクション --------------- */
+/******************* 5. 各セクション *******************/
 #greeting {
-  background: #ffeef8;
+  background: #d4f9f9; /* ごく淡いミント */
 }
 
 .from {
   display: block;
   margin-top: 1rem;
   font-style: italic;
+  color: #006d77;
 }
 
-/* 思い出写真 */
+/***** 思い出写真ギャラリー *****/
 .photos {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 }
-
 .photos img {
   width: 260px;
   height: 180px;
   object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 100, 100, 0.25);
 }
 
-/* BGM ボタン */
+/******************* 6. BGM ボタン *******************/
 #play-btn {
+  display: none;           /* イントロ動画中は非表示 — JS で block */
   position: fixed;
   right: 20px;
   bottom: 20px;
   padding: 0.8rem 1.2rem;
   border: none;
   border-radius: 30px;
-  background: #ff6cb5;
+  background: #20c9c9;
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 100, 100, 0.4);
   z-index: 10000;
+  transition: background 0.2s, transform 0.2s;
 }
-
 #play-btn:hover {
+  background: #17b2b2;
   transform: scale(1.05);
 }

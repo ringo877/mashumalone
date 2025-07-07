@@ -1,52 +1,72 @@
-/* ===== ユーティリティ：SHA-256 ハッシュ ===== */
-async function sha256(text){
+/* =============================
+   まほちゃん誕生日サイト — main JavaScript (最新) 
+   ============================= */
+
+/************* 0. ユーティリティ *************/
+async function sha256(text) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return [...new Uint8Array(buf)]
-           .map(b=>b.toString(16).padStart(2,'0'))
-           .join('');
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-/* ★ ここにご自分のパスワードを SHA-256 変換した 64 桁を貼り付けてください */
+/************* 1. 設定（パスワードのハッシュを差し替えてください） *************/
 const HASH = '7fb1d81b1242ca382756fcb35655500c11f55fa874b9a50ec729fd15f0669024';
 
-/* ===== パスワード入力 → イントロ動画 → 本編 & BGM ===== */
+/************* 2. 初期化：BGM ボタンを隠す *************/
+document.addEventListener('DOMContentLoaded', () => {
+  const playBtn = document.getElementById('play-btn');
+  if (playBtn) playBtn.style.display = 'none';
+});
+
+/************* 3. 共通要素参照 *************/
+const introLayer = document.getElementById('introVideo');
+const video      = document.getElementById('birthdayVideo');
+const skipBtn    = document.getElementById('skipIntro');
+const playBtn    = document.getElementById('play-btn');
+let mainShown    = false;  // 二重実行ガード
+
+/************* 4. パスワード入力ハンドラ *************/
 document.getElementById('enter').addEventListener('click', async () => {
   const pw = document.getElementById('pw').value;
-  if (await sha256(pw) !== HASH){
+  if (await sha256(pw) !== HASH) {
     document.getElementById('msg').textContent = 'パスワードが違います…';
     return;
   }
-
-  /* Step-1: ロック解除 */
   document.getElementById('lock').style.display = 'none';
-
-  /* Step-2: イントロ動画レイヤーを表示して再生 */
-  const introLayer = document.getElementById('introVideo');
-  const video      = document.getElementById('birthdayVideo');
   introLayer.style.display = 'flex';
-  video.play()?.catch(()=>{});                // 自動再生
-
-  /* Step-3 & 4: 動画終了 → タイトル → 0.8s 後にメイン＋BGM */
-  video.addEventListener('ended', () => {
-    introLayer.style.display = 'none';        // 黒幕を閉じる
-
-    const content = document.getElementById('content');
-    content.style.display = 'block';
-    document.body.classList.add('ready');     // 背景色を元に戻す
-
-    const header = document.getElementById('siteHeader');
-    header.classList.replace('hide-before','show-now');  // タイトルふわっ
-
-    setTimeout(() => {
-      document.getElementById('mainArea')
-              .classList.replace('hide-before','show-now'); // 他コンテンツふわっ
-      document.getElementById('bgm').play()?.catch(()=>{}); // BGM 開始
-    }, 800);  // タイトルのフェードイン時間と合わせる
-  }, { once:true });
+  video.play()?.catch(() => {});
 });
 
-/* ===== BGM 手動トグル（任意クリックで再生・停止） ===== */
-document.getElementById('play-btn').addEventListener('click', () => {
+/************* 5. イントロ終了 or スキップ *************/
+function showMain() {
+  if (mainShown) return;  // 1 回だけ
+  mainShown = true;
+
+  introLayer.style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+  document.body.classList.add('ready');
+
+  const header = document.getElementById('siteHeader');
+  header.classList.replace('hide-before', 'show-now');
+
+  setTimeout(() => {
+    document.getElementById('mainArea').classList.replace('hide-before', 'show-now');
+    const bgm = document.getElementById('bgm');
+    bgm.play()?.catch(() => {});
+    playBtn.style.display = 'block';
+  }, 800);
+}
+
+/* 動画終了 */
+video.addEventListener('ended', showMain, { once: true });
+
+/* Skip ボタン */
+skipBtn.addEventListener('click', () => {
+  video.pause();
+  showMain();
+});
+
+/************* 6. BGM 再生・停止トグル *************/
+playBtn.addEventListener('click', () => {
   const bgm = document.getElementById('bgm');
-  (bgm.paused ? bgm.play() : bgm.pause())?.catch(()=>{});
+  (bgm.paused ? bgm.play() : bgm.pause())?.catch(() => {});
 });
