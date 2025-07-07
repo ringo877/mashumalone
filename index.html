@@ -6,6 +6,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- 🔒 パスワード入力画面 -->
+  <div id="lock">
+    <h2>🔐 まほちゃんへ - パスワードを入れてね！</h2>
+    <input type="password" id="pw" placeholder="Password">
+    <button id="enter">OPEN</button>
+    <p id="msg" style="color:red;"></p>
+  </div>
+
+  <!-- ▼ここに もとの全コンテンツを丸ごと入れる -->
+  <div id="content" style="display:none;">
+
   <header>
     <h1>🎉 まほちゃん誕生日特設サイト 🎉</h1>
     <h2>〜26歳の君へ愛を込めて〜</h2>
@@ -54,7 +65,9 @@
     お使いのブラウザーでは音楽を再生できません。
   </audio>
   <button id="play-btn">♪ BGM を再生する</button>
+</div>
+<script src="script.js"></script>
+</body>
 
-  <script src="script.js"></script>
 </body>
 </html>
