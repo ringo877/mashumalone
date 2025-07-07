@@ -8,20 +8,31 @@
 <body>
   <!-- 🔒 パスワード入力画面 -->
   <div id="lock">
-    <h2>🔐 まほちゃんへ - パスワードを入れてね！</h2>
+    <h2>🔐 パスワードを入れてね！</h2>
     <input type="password" id="pw" placeholder="Password">
     <button id="enter">OPEN</button>
     <p id="msg" style="color:red;"></p>
   </div>
 
-  <!-- ▼ここに もとの全コンテンツを丸ごと入れる -->
-  <div id="content" style="display:none;">
+  <!-- 🎬 イントロ動画だけを載せるレイヤー -->
+<div id="introVideo" class="intro-layer">
+    <video id="birthdayVideo" width="720" poster="assets/photos/memory1.jpg">
+    <source src="assets/maho_video.mp4" type="video/mp4">
+    お使いのブラウザーでは動画を再生できません。
+  </video>
+</div>
 
-  <header>
+  <!-- ▼ここに もとの全コンテンツを丸ごと入れる -->
+<div id="content" style="display:none;">
+  <!-- ① タイトルブロック (先に表示) -->
+  <header id="siteHeader" class="hide-before">
     <h1>🎉 まほちゃん誕生日特設サイト 🎉</h1>
     <h2>〜26歳の君へ愛を込めて〜</h2>
   </header>
-
+    
+  <!-- ② その他コンテンツ (後から表示) -->
+  <main id="mainArea" class="hide-before">
+    
   <!-- 誕生日を祝う文言 -->
   <section id="greeting">
     <p>まほちゃん、26歳のお誕生日おめでとう！<br>
@@ -43,7 +54,7 @@
   <!-- お祝い動画 -->
   <section id="video">
     <h3>📽️ お祝いムービー 📽️</h3>
-    <video controls poster="assets/photos/memory1.jpg" width="720">
+    <video id="birthdayVideo" controls poster="assets/photos/memory1.jpg" width="720">
       <source src="assets/maho_video.mp4" type="video/mp4">
       お使いのブラウザーでは動画を再生できません。
     </video>
@@ -58,6 +69,8 @@
       <!-- 必要に応じて追加 -->
     </div>
   </section>
+  </main>
+
 
   <!-- BGM（自動再生はクリック後に開始） -->
   <audio id="bgm" loop>
