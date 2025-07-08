@@ -86,8 +86,20 @@ Array.from(document.querySelectorAll('#sidebar button')).forEach(btn=>{
   btn.addEventListener('click',e=>{
     const target=document.querySelector(e.currentTarget.dataset.scroll);
     target?.scrollIntoView({behavior:'smooth'});
+    // 開いたままだと邪魔なので閉じる
+    sidebar.classList.remove('open');
+    menuBtn.classList.remove('open');
   });
 });
+
+// ハンバーガー ↔︎ サイドバー開閉
+const menuBtn=document.getElementById('menuToggle');
+const sidebar=document.getElementById('sidebar');
+menuBtn.addEventListener('click',()=>{
+  menuBtn.classList.toggle('open');
+  sidebar.classList.toggle('open');
+});
+
 
 // 歌詞ポップアップ
 const lyricModal=document.getElementById('lyricModal');
@@ -110,10 +122,19 @@ if(firstAudio){bgm.src=firstAudio.querySelector('source').src;}
 
 // 曲をクリックで BGM にセット
 Array.from(document.querySelectorAll('.song-audio')).forEach(aud=>{
-  aud.addEventListener('play',()=>{
-    if(bgm.src!==aud.querySelector('source').src){
-      bgm.pause();bgm.src=aud.querySelector('source').src;bgm.play()?.catch(()=>{});
-    }
+  // aud.addEventListener('play',()=>{
+  //   if(bgm.src!==aud.querySelector('source').src){
+  //     bgm.pause();bgm.src=aud.querySelector('source').src;bgm.play()?.catch(()=>{});
+  //   }
+
+      aud.addEventListener('play',()=>{
+        const newSrc=aud.querySelector('source').src;
+        // audio 自体はすぐ停止し、BGM のみを再生させる
+        aud.pause();aud.currentTime=0;
+        if(bgm.src!==newSrc){
+          bgm.pause();bgm.src=newSrc;bgm.play()?.catch(()=>{});
+        }
+
   });
 });
 /* ====== 追記分 ★★ 変更 end =====*/

@@ -32,20 +32,24 @@
     </header>
 
     <!-- ★★ 変更①   サイドバー -->
+    <button id="menuToggle" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+
     <nav id="sidebar">
-      <button data-scroll="#greeting">Greeting</button>
-      <button data-scroll="#songs">Songs</button>
-      <button data-scroll="#video">Movie</button>
+      <button data-scroll="#message">🎂 メッセージ 🎂</button>
+      <button data-scroll="#songs">🎵 お祝いソング集 🎵</button>
+      <button data-scroll="#video">📽️ お祝いムービー 📽️</button>
     </nav>
     
     <!-- HERO ギャラリー -->
-    <section id="heroGallery" class="hero-gallery hide-before">
+    <section id="heroGallery" class="hero-gallery hide-before photos">
       <h3>📸 思い出アルバム 📸</h3>
-      <figure class="photos">
+      <figure>
         <img src="assets/photos/memory1.jpg" alt="思い出1" class="active">
         <figcaption>まほが投稿したコンストラクティブスピーチ</figcaption>
       </figure>
-      <figure class="photos">
+      <figure>
         <img src="assets/photos/memory2.jpg" alt="思い出2">
         <figcaption>旅行で決めポーズをする人々</figcaption>
       </figure>
