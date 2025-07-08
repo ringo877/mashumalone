@@ -79,3 +79,41 @@ playBtn.addEventListener('click',()=>{
     if(mainVideo) mainVideo.setAttribute('poster',dataURL);
   },{ once:true });
 })();
+
+/* ====== 追記分 ★★ 変更 start ======*/
+//  サイドバーのスムーススクロール
+Array.from(document.querySelectorAll('#sidebar button')).forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    const target=document.querySelector(e.currentTarget.dataset.scroll);
+    target?.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+// 歌詞ポップアップ
+const lyricModal=document.getElementById('lyricModal');
+const lyricText=document.getElementById('lyricText');
+const closeLyric=document.getElementById('closeLyric');
+closeLyric.addEventListener('click',()=>lyricModal.close());
+
+Array.from(document.querySelectorAll('.song-title')).forEach(el=>{
+  el.style.cursor='pointer';
+  el.addEventListener('click',()=>{
+    lyricText.textContent=el.dataset.lyrics||'歌詞が登録されていません';
+    lyricModal.showModal();
+  });
+});
+
+// BGM 選択機能
+const bgm=document.getElementById('bgm');
+const firstAudio=document.querySelector('.song-audio[data-default="true"]');
+if(firstAudio){bgm.src=firstAudio.querySelector('source').src;}
+
+// 曲をクリックで BGM にセット
+Array.from(document.querySelectorAll('.song-audio')).forEach(aud=>{
+  aud.addEventListener('play',()=>{
+    if(bgm.src!==aud.querySelector('source').src){
+      bgm.pause();bgm.src=aud.querySelector('source').src;bgm.play()?.catch(()=>{});
+    }
+  });
+});
+/* ====== 追記分 ★★ 変更 end =====*/

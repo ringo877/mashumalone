@@ -126,3 +126,19 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 #message{background:#d4f9f9;}
 #video  {background:var(--mint-very);}
 .footer{background:#d4f9f9;}
+
+/*********** サイドバー ★★ 変更① ***********/
+#sidebar{position:fixed;left:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.6rem;padding:.5rem;z-index:9998;}
+#sidebar button{background:var(--mint-light);border:none;padding:.6rem .8rem;border-radius:6px;font-size:.8rem;color:var(--mint-dark);box-shadow:0 2px 4px rgba(0,0,0,.15);}
+#sidebar button:active{transform:scale(.96);}
+
+/*********** 歌詞モーダル ★★ 変更④ ***********/
+#lyricModal{padding:1.2rem 1rem;background:var(--mint-very);border:none;border-radius:10px;max-width:90%;}
+#lyricModal::backdrop{background:rgba(0,0,0,.5);}
+#lyricModal pre{white-space:pre-wrap;font-family:inherit;color:var(--mint-dark);margin:0 0 1rem;}
+#closeLyric{padding:.4rem .8rem;border:none;background:var(--mint);color:#fff;border-radius:6px;}
+
+/* ギャラリー figure キャプション ★★ 変更③
+figure.photos{display:inline-block;margin:1rem .5rem;text-align:center;}
+figure.photos img{display:block;margin-bottom:.3rem;}
+figure.photos figcaption{font-size:.85rem;color:var(--mint-dark);} */

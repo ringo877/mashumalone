@@ -31,10 +31,24 @@
       <h2>〜26歳の君へ愛を込めて〜</h2>
     </header>
 
+    <!-- ★★ 変更①   サイドバー -->
+    <nav id="sidebar">
+      <button data-scroll="#greeting">Greeting</button>
+      <button data-scroll="#songs">Songs</button>
+      <button data-scroll="#video">Movie</button>
+    </nav>
+    
     <!-- HERO ギャラリー -->
     <section id="heroGallery" class="hero-gallery hide-before">
-      <img src="assets/photos/memory1.jpg" alt="思い出1" class="active">
-      <img src="assets/photos/memory2.jpg" alt="思い出2">
+      <h3>📸 思い出アルバム 📸</h3>
+      <figure class="photos">
+        <img src="assets/photos/memory1.jpg" alt="思い出1" class="active">
+        <figcaption>まほが投稿したコンストラクティブスピーチ</figcaption>
+      </figure>
+      <figure class="photos">
+        <img src="assets/photos/memory2.jpg" alt="思い出2">
+        <figcaption>旅行で決めポーズをする人々</figcaption>
+      </figure>
     </section>
 
     <!-- メイン領域 -->
@@ -60,6 +74,21 @@
         <h3>🎵 お祝いソング集 🎵</h3>
         <ul class="song-list">
           <li>
+            <!-- 歌詞ポップ用 data-lyrics 属性追加 -->
+            <span class="song-title" data-lyrics="♪ Happy birthday to you…\n君の笑顔が今日も輝く">まほちゃんの誕生日</span>
+            <span>作詞・作曲：Suno</span>
+            <audio controls preload="auto" class="song-audio" data-default="true">
+              <source src="assets/songs/maho_song.mp3" type="audio/mpeg">
+            </audio>
+          </li>
+          <li>
+            <span class="song-title" data-lyrics="アップビートなバースデー！\nみんなで手を叩こう">The Claim</span>
+            <span>作詞：ゆいかちゃん　作曲：Suno</span>
+            <audio controls preload="auto" class="song-audio">
+              <source src="assets/songs/the-claim.mp3" type="audio/mpeg">
+            </audio>
+          </li>
+          <!-- <li>
             <span>まほちゃんの誕生日</span>
             <span>作詞・作曲：Suno</span>
             <audio controls preload="auto">
@@ -91,7 +120,7 @@
             <audio controls preload="auto">
               <source src="assets/songs/maho_song2.mp3" type="audio/mpeg">
             </audio>
-          </li>
+          </li> -->
         </ul>
       </section>
 
@@ -107,14 +136,16 @@
         <p><small>Copyright 2025 Ayano&Yuika</small></p>
         <p><small>作成日：<time>2025-07-07</time>　
           更新日：<time>2025-07-07</time></small></p>
+          <a href="https://ameblo.jp/mashumalone/entry-11896486355.html" target="_blank" rel="noopener noreferrer"><img src="assets/photos/mashumalone.png" alt="ここをクリックしてね！" ></a>
       </footer>  
     </main>
   </div>
+  <!-- 歌詞ポップアップ -->
+  <!-- ★★ 変更④   モーダル追加 -->
+  <dialog id="lyricModal"><pre id="lyricText"></pre><button id="closeLyric">Close</button></dialog>
 
-  <!-- ♪ BGM (自動再生用) -->
-  <audio id="bgm" loop preload="auto"><source src="assets/songs/maho_song.mp3" type="audio/mpeg"></audio>
+  <audio id="bgm" loop preload="auto"></audio> <!-- src は JS で設定 -->
   <button id="play-btn">♪ BGM</button>
-
   <script src="script.js"></script>
 </body>
 </html>
