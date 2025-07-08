@@ -4,7 +4,7 @@
 
 /************* 0. 設定 *************/
 // ↓ ご自分のパスワードを SHA‑256 変換した 64 文字に差し替えてください
-const HASH = '7fb1d81b1242ca382756fcb35655500c11f55fa874b9a50ec729fd15f0669024';
+const HASH = '398f64de21a9d7228fc607938bde4f72015cb4aec977e20452356aacfbb13c89';
 
 /************* 1. ユーティリティ *************/
 const $ = id => document.getElementById(id);
