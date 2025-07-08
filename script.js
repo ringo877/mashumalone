@@ -137,4 +137,28 @@ Array.from(document.querySelectorAll('.song-audio')).forEach(aud=>{
 
   });
 });
-/* ====== 追記分 ★★ 変更 end =====*/
+
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelector('.slides');
+  const slideCount = slides.children.length;
+  let index = 0;
+
+  function update(){
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  document.querySelector('.next').addEventListener('click', () => {
+    index = (index + 1) % slideCount;
+    update();
+  });
+
+  document.querySelector('.prev').addEventListener('click', () => {
+    index = (index - 1 + slideCount) % slideCount;
+    update();
+  });
+
+  /* 4 秒ごとに自動再生 */
+  setInterval(() => {
+    document.querySelector('.next').click();
+  }, 4000);
+});

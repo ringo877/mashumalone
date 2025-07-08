@@ -57,18 +57,24 @@
 
     <section id="album">
       <h3>📸 思い出アルバム 📸</h3>
-      <div class="photos">
-        <figure>
-          <img src="assets/photos/memory2.jpg" alt="まほが投稿したコンストラクティブスピーチ">
-          <figcaption>まほが投稿したコンストラクティブスピーチ</figcaption>
-        </figure>
+      <div class="slider">
+        <button class="prev" aria-label="前へ">‹</button>
 
-        <figure>
-          <img src="assets/photos/memory1.jpg" alt="旅行で決めポーズをする人々">
-          <figcaption>旅行で決めポーズをする人々</figcaption>
-        </figure>
+        <ul class="slides">
+          <li>
+            <img src="assets/photos/memory1.jpg" alt="思い出1" class="active">
+            <p class="caption">まほが投稿したコンストラクティブスピーチ</p>
+          </li>
 
-        <!-- 追加画像があれば同じ構造で追加 -->
+          <li>
+            <img src="assets/photos/memory2.jpg" alt="思い出2">
+            <p class="caption">旅行で決めポーズをする人々</p>
+          </li>
+
+          <!-- 画像を増やす場合は <li>〜</li> をコピーして追加 -->
+        </ul>
+
+        <button class="next" aria-label="次へ">›</button>
       </div>
     </section>
 
