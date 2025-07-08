@@ -59,24 +59,6 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 #greeting{background:#d4f9f9;}
 .from{display:block;margin-top:1rem;font-style:italic;color:#006d77;}
 
-/***** ギャラリー *****/
-.photos{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:1rem;
-  margin-top:.5rem;
-}
-.photos img{
-  width:45vw;           /* 画面幅の 45% */
-  max-width:260px;
-  height:32vw;          /* 16:9 に近い比率 */
-  max-height:180px;
-  object-fit:cover;
-  border-radius:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,.15);
-}
-
 /***** 動画プレーヤー (本編内) *****/
 #video video{
   width:100%;max-width:720px;aspect-ratio:16/9;height:auto;display:block;margin:0 auto;border-radius:12px;object-fit:cover;background:#000;
@@ -143,11 +125,39 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 #menuToggle.open span:nth-child(2){opacity:0;}
 #menuToggle.open span:nth-child(3){transform:translateY(-10px) rotate(-45deg);}
  
- /* ---------- ギャラリー ---------- */
-.photos{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:.5rem;}
-.photos figure{width:45vw;max-width:260px;margin:0;text-align:center;}
-.photos img{width:100%;height:auto;border-radius:10px;object-fit:cover;box-shadow:0 2px 6px rgba(0,0,0,.15);}
-.photos figcaption{margin-top:.35rem;font-size:.85rem;color:var(--mint-dark);}
+/***** ギャラリー *****/
+.photos{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.2rem;
+  margin:1rem 0;
+  padding:0 1rem;
+}
+
+/* figure 全体を縦並び＆中央寄せ */
+.photos figure{
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.photos img{
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;      /* 16:9 を維持しつつ自動伸縮 */
+  object-fit:cover;
+  border-radius:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+.photos figcaption{
+  margin-top:.45rem;
+  font-size:.9rem;
+  color:var(--mint-dark);
+  line-height:1.35;
+}
 
 /*********** 歌詞モーダル ★★ 変更④ ***********/
 #lyricModal{padding:1.2rem 1rem;background:var(--mint-very);border:none;border-radius:10px;max-width:90%;}
