@@ -185,3 +185,9 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 #lyricModal::backdrop{background:rgba(0,0,0,.5);}
 #lyricModal pre{white-space:pre-wrap;font-family:inherit;color:var(--mint-dark);margin:0 0 1rem;}
 #closeLyric{padding:.4rem .8rem;border:none;background:var(--mint);color:#fff;border-radius:6px;}
+
+.marshmallow-img {
+  width: 80px;
+  height: auto;
+  display: inline-block;
+}
