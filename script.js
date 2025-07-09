@@ -52,6 +52,13 @@ skipBtn.addEventListener('click', ()=>{ video.pause(); showMain(); });
 
 /************* 6. BGM トグル *************/
 playBtn.addEventListener('click',()=>{
+  // BGM再生時、他の曲audioをすべて停止
+  Array.from(document.querySelectorAll('.song-audio')).forEach(aud=>{
+    if (!aud.paused) {
+      aud.pause();
+      aud.currentTime = 0;
+    }
+  });
   const b=$('bgm'); (b.paused?b.play():b.pause())?.catch(()=>{});
 });
 
@@ -122,19 +129,12 @@ if(firstAudio){bgm.src=firstAudio.querySelector('source').src;}
 
 // 曲をクリックで BGM にセット
 Array.from(document.querySelectorAll('.song-audio')).forEach(aud=>{
-  // aud.addEventListener('play',()=>{
-  //   if(bgm.src!==aud.querySelector('source').src){
-  //     bgm.pause();bgm.src=aud.querySelector('source').src;bgm.play()?.catch(()=>{});
-  //   }
-
-      aud.addEventListener('play',()=>{
-        const newSrc=aud.querySelector('source').src;
-        // audio 自体はすぐ停止し、BGM のみを再生させる
-        aud.pause();aud.currentTime=0;
-        if(bgm.src!==newSrc){
-          bgm.pause();bgm.src=newSrc;bgm.play()?.catch(()=>{});
-        }
-
+  aud.addEventListener('play',()=>{
+    // 曲audio再生時、BGMは止める
+    if(!bgm.paused){
+      bgm.pause();
+    }
+    // 以降はaudio自身で再生・シークバーも動く（BGMにはセットしない）
   });
 });
 
