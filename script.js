@@ -138,6 +138,23 @@ Array.from(document.querySelectorAll('.song-audio')).forEach(aud=>{
   });
 });
 
+// 「BGMに設定」ボタン機能
+Array.from(document.querySelectorAll('.set-bgm-btn')).forEach((btn, i) => {
+  btn.addEventListener('click', () => {
+    const audio = btn.parentElement.querySelector('.song-audio');
+    const source = audio.querySelector('source');
+    if (source && bgm) {
+      bgm.src = source.src;
+      // BGMを一時停止し、先頭に戻す
+      bgm.pause();
+      bgm.currentTime = 0;
+      // ユーザーに通知（任意）
+      btn.textContent = '♪BGMボタンを押してね';
+      setTimeout(() => { btn.textContent = 'この曲をBGMに設定'; }, 1500);
+    }
+  });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelector('.slides');
   const slideCount = slides.children.length;

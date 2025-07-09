@@ -70,6 +70,11 @@
             <img src="assets/photos/memory1.jpg" alt="旅行">
             <p class="caption">旅行で決めポーズをする人々</p>
           </li>
+          <li>
+            <img src="assets/photos/memory1.jpg" alt="旅行">
+            <p class="caption">旅行で決めポーズをする人々</p>
+          </li>
+
           <!-- 画像を増やす場合は <li>〜</li> をコピーして追加 -->
         </ul>
 
@@ -112,6 +117,7 @@
             <audio controls preload="auto" class="song-audio" data-default="true">
               <source src="assets/songs/maho_song.mp3" type="audio/mpeg">
             </audio>
+            <button class="set-bgm-btn" type="button">この曲を<br>BGMに設定</button>
           </li>
           <li>
             <span class="song-title" data-lyrics="アップビートなバースデー！\nみんなで手を叩こう">The Claim</span>
@@ -119,6 +125,7 @@
             <audio controls preload="auto" class="song-audio">
               <source src="assets/songs/the-claim.mp3" type="audio/mpeg">
             </audio>
+            <button class="set-bgm-btn" type="button">この曲を<br>BGMに設定</button>
           </li>
           <!-- <li>
             <span>まほちゃんの誕生日</span>
@@ -177,7 +184,7 @@
   <dialog id="lyricModal"><pre id="lyricText"></pre><button id="closeLyric">Close</button></dialog>
 
   <audio id="bgm" loop preload="auto"></audio> <!-- src は JS で設定 -->
-  <button id="play-btn">♪ BGM</button>
+  <button id="play-btn">♪ BGM停止/再開</button>
   <script src="script.js"></script>
 </body>
 </html>
