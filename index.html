@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>まほちゃん誕生日特設サイト 〜26歳の君へ愛を込めて〜</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <link rel="preload" href="style.css" as="style">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +19,7 @@
   <!-- 🎬 イントロ動画レイヤー -->
   <div id="introVideo" class="intro-layer">
     <button id="skipIntro">Skip</button>
-    <video id="birthdayVideo" playsinline preload="auto" width="720">
+    <video id="birthdayVideo" playsinline preload="none" width="720">
       <source src="assets/maho_video.mp4" type="video/mp4">
     </video>
   </div>
@@ -249,7 +250,7 @@
 
       <section id="video">
         <h3>📽️ お祝いムービー 📽️</h3>
-        <video id="mainVideo" controls playsinline width="100%">
+        <video id="mainVideo" controls playsinline preload="none" width="100%">
           <source src="assets/maho_video.mp4" type="video/mp4">
         </video>
       </section>
@@ -281,6 +282,6 @@
 
   <audio id="bgm" loop preload="auto"></audio> <!-- src は JS で設定 -->
   <button id="play-btn">♪ BGM停止/再開</button>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

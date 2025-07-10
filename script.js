@@ -21,6 +21,25 @@ let   mainShown  = false;               // 二重遷移防止
 /************* 3. 初期化 *************/
 document.addEventListener('DOMContentLoaded',()=>{ playBtn.style.display='none'; });
 
+/* === 軽量化: 遅延読み込み設定 === */
+document.addEventListener('DOMContentLoaded',()=>{
+  // 画像は遅延読み込み
+  document.querySelectorAll('img').forEach(img=>{
+    img.loading = 'lazy';
+    img.decoding = 'async';
+  });
+
+  // 音声ファイルはユーザー操作時まで読み込まない
+  document.querySelectorAll('audio').forEach(aud=>{
+    aud.preload = 'none';
+  });
+
+  // 動画も初期読み込みしない
+  document.querySelectorAll('video').forEach(v=>{
+    v.preload = 'none';
+  });
+});
+
 /************* 4. パスワード入力 *************/
 $('enter').addEventListener('click',async()=>{
   const pw=$('pw').value;
