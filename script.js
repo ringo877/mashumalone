@@ -202,11 +202,10 @@ const lyricsMap={
 
 コンストラクティブスピーチ`,
 
+  shaso:`『車窓からあの子』\n\n歌詞準備中…`,
   rag_girl:`『Rag Girl』\n\n歌詞準備中…`,
   violinist:`『Violinist』\n\n歌詞準備中…`,
-
-shaso:`『車窓からあの子』
-`
+  kokuhaku:`『まほちゃんに告白しようと思ってる』\n\n歌詞準備中…`
 };
 
 // 歌詞ポップアップ
@@ -247,16 +246,25 @@ Array.from(document.querySelectorAll('.song-audio')).forEach(aud=>{
 });
 
 // 「BGMに設定」ボタン機能
-Array.from(document.querySelectorAll('.set-bgm-btn')).forEach((btn, i) => {
-  btn.addEventListener('click', () => {
-    const audio = btn.parentElement.querySelector('.song-audio');
-    const source = audio.querySelector('source');
-    if (source && bgm) {
-      bgm.src = source.src;
-      // BGMを一時停止し、先頭に戻す
+Array.from(document.querySelectorAll('.set-bgm-btn')).forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    let src = btn.dataset.src;
+    if(!src){
+      // data-src が無ければ既存のロジックで同一 li 内最初の audio を使用
+      const audio = btn.parentElement.querySelector('.song-audio');
+      src = audio?.querySelector('source')?.src;
+    }
+    if (src && bgm) {
+      // 他の曲 audio を停止
+      Array.from(document.querySelectorAll('.song-audio')).forEach(a=>{
+        if(!a.paused){ a.pause(); a.currentTime=0; }
+      });
+
+      // BGM を新しい曲に切り替え
       bgm.pause();
+      bgm.src = src;
       bgm.currentTime = 0;
-      // ボタン文言は変更しない
+      bgm.play()?.catch(()=>{});
     }
   });
 });
