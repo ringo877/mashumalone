@@ -192,7 +192,7 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
   font-family: inherit;
   color: var(--mint-dark);
   margin: 0 0 1rem;
-  text-align: left;
+  text-align: center;
 }
 
 .marshmallow-img {
@@ -230,3 +230,7 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 .dots{display:flex;justify-content:center;gap:8px;margin-top:.8rem;}
 .dot{width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,.3);cursor:pointer;transition:background .3s ease,transform .3s ease;}
 .dot.active{background:var(--mint-dark);transform:scale(1.2);}
+
+.banana-img{width:120px;height:auto;cursor:pointer;margin:1rem auto;display:block;}
+#bananaDialog{padding:1.2rem 1rem;background:var(--mint-very);border:none;border-radius:10px;max-width:80%;text-align:center;}
+#bananaDialog::backdrop{background:rgba(0,0,0,.5);}

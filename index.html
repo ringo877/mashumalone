@@ -116,6 +116,10 @@
       <section id="greeting">
         <p>まほちゃん、26歳のお誕生日おめでとう！<br>
            いつも笑顔をありがとう。これからの一年もキラキラ輝く素敵な時間になりますように。</p>
+
+        <!-- バナナ画像（クリックでメッセージ表示） -->
+        <img src="assets/photos/banana3.png" alt="banana" id="bananaImg" class="banana-img">
+        
       </section>
 
       <!-- メッセージエリア -->
@@ -174,7 +178,7 @@
             <button class="set-bgm-btn" type="button" data-src="assets/songs/shaso2.mp3">この曲をBGMに設定</button>
           </li>
           <li>
-            <span class="song-title" data-lyrics-id="rag_girl">Rag Girl</span>
+            <span class="song-title" data-lyrics-id="rag_girl">雑巾少女Z</span>
             <span>作詞：ゆいかちゃん　作曲：Suno</span>
             <audio controls preload="auto" class="song-audio">
               <source src="assets/songs/rag_girl.mp3" type="audio/mpeg">
@@ -203,7 +207,7 @@
       <section id="video">
         <h3>📽️ お祝いムービー 📽️</h3>
         <video id="mainVideo" controls playsinline width="100%">
-          <source src="assets/songs/maho_video.mp4" type="video/mp4">
+          <source src="assets/maho_video.mp4" type="video/mp4">
         </video>
       </section>
 
@@ -219,6 +223,9 @@
   <!-- 歌詞ポップアップ -->
   <!-- ★★ 変更④   モーダル追加 -->
   <dialog id="lyricModal"><div id="lyricText"></div><button id="closeLyric">Close</button></dialog>
+
+  <!-- バナナメッセージ用ポップアップ -->
+  <dialog id="bananaDialog"><p id="bananaMsgText">🍌 バナナ発見！</p><button id="closeBanana">Close</button></dialog>
 
   <!-- 画像フルサイズ表示モーダル -->
   <dialog id="imgModal"><img id="fullImg" src="" alt=""><button id="closeImg">Close</button></dialog>
