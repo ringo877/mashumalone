@@ -119,7 +119,7 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 /* ハンバーガーボタン */
 #menuToggle{position:fixed;top:16px;right:16px;width:32px;height:24px;border:none;background:transparent;
   display:flex;flex-direction:column;justify-content:space-between;z-index:10001;}
-#menuToggle span{display:block;height:4px;border-radius:2px;background:var(--mint-dark);
+#menuToggle span{display:block;width:100%;height:4px;border-radius:2px;background:var(--mint-dark);
   transition:transform .3s ease,opacity .3s ease;}
 #menuToggle.open span:nth-child(1){transform:translateY(10px) rotate(45deg);}
 #menuToggle.open span:nth-child(2){opacity:0;}
@@ -234,3 +234,9 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 .banana-img{width:120px;height:auto;cursor:pointer;margin:1rem auto;display:block;}
 #bananaDialog{padding:1.2rem 1rem;background:var(--mint-very);border:none;border-radius:10px;max-width:80%;text-align:center;}
 #bananaDialog::backdrop{background:rgba(0,0,0,.5);}
+#closeBanana{padding:.4rem .8rem;border:none;background:var(--mint);color:#fff;border-radius:6px;}
+
+/* ==== SP での表示強制 （万一 display:none が上書きされても） ==== */
+@media (max-width: 768px){
+  #menuToggle{display:flex !important;}
+}
