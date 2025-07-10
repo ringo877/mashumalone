@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 
 /* =============================
    まほちゃん誕生日サイト — チョコミント配色 + iPhone 対応 (CSS)
@@ -15,7 +15,7 @@
 /*********** 0. 共通 ***********/
 html,body{
   height:100%;margin:0;
-  font-family:"Zen Kurenaido",sans-serif;
+  font-family:"Zen Maru Gothic", "Zen Kurenaido", sans-serif;
   background:var(--mint-very);color:var(--mint-dark);
   -webkit-tap-highlight-color:transparent;
   text-align:center;
@@ -113,7 +113,7 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 #botsu  {background:#d4f9f9;padding:2rem 1rem;text-align:center;}
 .footer{background:#d4f9f9;}
 
-#sidebar{position:fixed;top:0;right:0;width:220px;height:100%;background:var(--mint-light);padding:4rem 1rem;
+#sidebar{position:fixed;top:0;right:0;width:260px;height:100%;background:var(--mint-light);padding:4rem 1rem;
   box-shadow:-2px 0 8px rgba(0,0,0,.15);transform:translateX(100%);transition:transform .3s ease;z-index:9998;}
 #sidebar.open{transform:translateX(0);}
 #sidebar button{display:block;width:100%;background:none;border:none;font-size:1.1rem;
