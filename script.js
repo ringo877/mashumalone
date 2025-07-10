@@ -289,14 +289,34 @@ const lyricsMap={
 const lyricModal=document.getElementById('lyricModal');
 const lyricText=document.getElementById('lyricText');
 const closeLyric=document.getElementById('closeLyric');
-closeLyric.addEventListener('click',()=>lyricModal.close());
+
+// === ページスクロール固定ユーティリティ ===
+let savedScrollY=0;
+function lockScroll(){
+  savedScrollY = window.scrollY || document.documentElement.scrollTop;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${savedScrollY}px`;
+  document.body.style.width='100%';
+  document.body.style.overflowY='scroll'; // スクロールバーを残す
+}
+function unlockScroll(){
+  document.body.style.position='';
+  document.body.style.top='';
+  document.body.style.overflowY='';
+  window.scrollTo(0, savedScrollY);
+}
+
+closeLyric.addEventListener('click',()=>{
+  lyricModal.close();
+  unlockScroll();
+});
 
 // バナナポップアップ
 const bananaImg=document.getElementById('bananaImg');
 const bananaDialog=document.getElementById('bananaDialog');
 const closeBanana=document.getElementById('closeBanana');
-bananaImg?.addEventListener('click',()=>bananaDialog.showModal());
-closeBanana?.addEventListener('click',()=>bananaDialog.close());
+bananaImg?.addEventListener('click',()=>{lockScroll();bananaDialog.showModal();});
+closeBanana?.addEventListener('click',()=>{bananaDialog.close();unlockScroll();});
 
 Array.from(document.querySelectorAll('.song-title')).forEach(el=>{
   el.style.cursor='pointer';
@@ -309,10 +329,11 @@ Array.from(document.querySelectorAll('.song-title')).forEach(el=>{
       rawLyrics = el.dataset.lyrics || '歌詞が登録されていません';
     }
     lyricText.innerHTML = rawLyrics.replace(/\n/g, '<br>');
+    lockScroll();
     lyricModal.showModal();
-    // スクロールを最上部にリセット
-    lyricModal.scrollTop = 0;
+    // スクロールを最上部にリセット（モバイルSafari対策）
     lyricText.scrollTop = 0;
+    requestAnimationFrame(()=>{ lyricText.scrollTop = 0; });
   });
 });
 

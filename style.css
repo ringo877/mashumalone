@@ -104,6 +104,9 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 .song-list span{font-weight:600;color:var(--mint-dark);}
 .song-list audio{width:100%;}
 
+/* 注意書き */
+.note{margin:.4rem 0 1rem;font-size:.9rem;color:var(--mint-dark);opacity:.8;}
+
 /* ===== セクション背景調整 ===== */
 #message{background:#d4f9f9;}
 #video  {background:var(--mint-very);}
@@ -187,12 +190,14 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 #lyricModal{padding:1.2rem 1rem;background:var(--mint-very);border:none;border-radius:10px;max-width:90%;}
 #lyricModal::backdrop{background:rgba(0,0,0,.5);}
 #lyricModal pre{white-space:pre-wrap;font-family:inherit;color:var(--mint-dark);margin:0 0 1rem;}
-#closeLyric{padding:.4rem .8rem;border:none;background:var(--mint);color:#fff;border-radius:6px;}
+#lyricModal{position:relative;}
+#closeLyric{position:absolute;top:8px;right:8px;padding:.4rem .8rem;border:none;background:var(--mint);color:#fff;border-radius:6px;}
 #lyricText {
   font-family: inherit;
   color: var(--mint-dark);
   margin: 0 0 1rem;
   text-align: center;
+  padding-top: 2.4rem; /* Close ボタンの高さ分スペース確保 */
 }
 
 .marshmallow-img {
@@ -234,7 +239,8 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 .banana-img{width:120px;height:auto;cursor:pointer;margin:1rem auto;display:block;}
 #bananaDialog{padding:1.2rem 1rem;background:var(--mint-very);border:none;border-radius:10px;max-width:80%;text-align:center;}
 #bananaDialog::backdrop{background:rgba(0,0,0,.5);}
-#closeBanana{padding:.4rem .8rem;border:none;background:var(--mint);color:#fff;border-radius:6px;}
+#bananaDialog{position:relative;}
+#closeBanana{position:absolute;top:8px;right:8px;padding:.4rem .8rem;border:none;background:var(--mint);color:#fff;border-radius:6px;}
 
 /* ==== SP での表示強制 （万一 display:none が上書きされても） ==== */
 @media (max-width: 768px){
