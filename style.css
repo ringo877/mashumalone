@@ -138,6 +138,8 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 .slider .slides{
   display:flex;
   transition:transform .6s ease;
+  margin:0;           /* 追加: 余白リセット */
+  padding:0;          /* 追加: 余白リセット */
 }
 
 /* 各スライド */
@@ -175,6 +177,7 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
   padding:.3rem .6rem;
   border-radius:50%;
   cursor:pointer;
+  z-index:2;            /* ← 追加 */
 }
 .slider button.prev{left:8px;}
 .slider button.next{right:8px;}
@@ -185,6 +188,12 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 #lyricModal::backdrop{background:rgba(0,0,0,.5);}
 #lyricModal pre{white-space:pre-wrap;font-family:inherit;color:var(--mint-dark);margin:0 0 1rem;}
 #closeLyric{padding:.4rem .8rem;border:none;background:var(--mint);color:#fff;border-radius:6px;}
+#lyricText {
+  font-family: inherit;
+  color: var(--mint-dark);
+  margin: 0 0 1rem;
+  text-align: left;
+}
 
 .marshmallow-img {
   width: 80px;
@@ -193,26 +202,31 @@ body.ready #siteHeader + #mainArea{background:var(--mint-very);}
 }
 
 .set-bgm-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5rem auto 0 auto;
-  padding: 0.8rem 2.2rem;
-  font-size: 1.1rem;
-  width: auto;
-  min-width: 220px;
-  max-width: 90%;
+  position: relative;
+  padding: .6rem .6rem;
   border: none;
   border-radius: 30px;
   background: var(--mint);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-  text-align: center;
-  white-space: pre-line;
+  width: auto;
+  margin: 0.5rem auto 0 auto;
 }
 .set-bgm-btn:active {
   transform: scale(.97);
-  background: var(--mint-dark);
 }
+
+#message p{white-space:pre-line;}
+
+/*********** 画像モーダル ***********/
+#imgModal{padding:0;border:none;background:transparent;}
+#imgModal::backdrop{background:rgba(0,0,0,.8);}
+#fullImg{max-width:90vw;max-height:90vh;display:block;border-radius:10px;}
+#closeImg{position:absolute;top:8px;right:8px;padding:.4rem .8rem;border:none;background:var(--mint);color:#fff;border-radius:6px;}
+
+/***** スライド下ドット *****/
+.dots{display:flex;justify-content:center;gap:8px;margin-top:.8rem;}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,.3);cursor:pointer;transition:background .3s ease,transform .3s ease;}
+.dot.active{background:var(--mint-dark);transform:scale(1.2);}

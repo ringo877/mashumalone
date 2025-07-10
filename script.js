@@ -108,6 +108,107 @@ menuBtn.addEventListener('click',()=>{
 });
 
 
+// 歌詞マップ（data-lyrics-id と紐付け）
+const lyricsMap={
+  maho_birthday:`『まほちゃんの誕生日』
+
+まほちゃんお誕生日おめでとう
+ハッピーバースデー まほちゃん
+まほちゃんお誕生日おめでとう
+ハッピーバースデー まほちゃん
+
+生まれてきてくれてありがとう
+いつも元気をくれてありがとう
+楽しい日々をありがとう
+お誕生日おめでとう
+
+まほちゃんお誕生日おめでとう
+ハッピーバースデー まほちゃん
+まほちゃんお誕生日おめでとう
+ハッピーバースデー まほちゃん
+
+生まれてきてくれてありがとう
+いつも元気をくれてありがとう
+楽しい日々をありがとう
+お誕生日おめでとう
+
+まほちゃんお誕生日おめでとう
+ハッピーバースデー まほちゃん
+まほちゃんお誕生日おめでとう
+ハッピーバースデー まほちゃん
+
+生まれてきてくれてありがとう
+いつも元気をくれてありがとう
+楽しい日々をありがとう
+お誕生日おめでとう`,
+
+  the_claim:`『The Claim』
+
+締め切りまであと何分？
+焦り募る指先
+縺れる心 振り切ってよanxiety
+
+締め切りまであと何分？
+研ぎ澄まして感覚
+極限でこそ 発揮されるpotential
+
+そう、それは
+コンストラクティブスピーチ
+
+コンストラクティブスピーチ
+
+コンストラクティブスピーチ
+
+締め切りまであと1分！
+押し込むのはエンター
+指の先から 広がるのはconviction
+
+間に合った！
+はずだったのに
+
+そう、それは
+コメント欄
+
+コメント欄
+
+コメント欄
+
+迫真のコメント投下
+空虚に響くGreeting
+
+空白のプラットフォーム
+孤独に輝くMaho Watanabe
+
+過ぎる締切
+冷やかしのWow
+なにはともあれ
+証拠を確保
+これは言い訳？
+いいや弁解
+
+「投稿先を 間違えました！」
+
+叫べ潔白
+示せよ無罪
+
+そう、それは
+コンストラクティブスピーチ
+
+コンストラクティブスピーチ
+
+コンストラクティブスピーチ
+
+忘れない
+
+コンストラクティブスピーチ`,
+
+  rag_girl:`『Rag Girl』\n\n歌詞準備中…`,
+  violinist:`『Violinist』\n\n歌詞準備中…`,
+
+shaso:`『車窓からあの子』
+`
+};
+
 // 歌詞ポップアップ
 const lyricModal=document.getElementById('lyricModal');
 const lyricText=document.getElementById('lyricText');
@@ -117,7 +218,14 @@ closeLyric.addEventListener('click',()=>lyricModal.close());
 Array.from(document.querySelectorAll('.song-title')).forEach(el=>{
   el.style.cursor='pointer';
   el.addEventListener('click',()=>{
-    lyricText.textContent=el.dataset.lyrics||'歌詞が登録されていません';
+    const id = el.dataset.lyricsId;
+    let rawLyrics = '';
+    if(id && lyricsMap[id]){
+      rawLyrics = lyricsMap[id];
+    } else {
+      rawLyrics = el.dataset.lyrics || '歌詞が登録されていません';
+    }
+    lyricText.innerHTML = rawLyrics.replace(/\n/g, '<br>');
     lyricModal.showModal();
   });
 });
@@ -129,7 +237,7 @@ if(firstAudio){bgm.src=firstAudio.querySelector('source').src;}
 
 // 曲をクリックで BGM にセット
 Array.from(document.querySelectorAll('.song-audio')).forEach(aud=>{
-  aud.addEventListener('play',()=>{
+      aud.addEventListener('play',()=>{
     // 曲audio再生時、BGMは止める
     if(!bgm.paused){
       bgm.pause();
@@ -148,9 +256,7 @@ Array.from(document.querySelectorAll('.set-bgm-btn')).forEach((btn, i) => {
       // BGMを一時停止し、先頭に戻す
       bgm.pause();
       bgm.currentTime = 0;
-      // ユーザーに通知（任意）
-      btn.textContent = '♪BGMボタンを押してね';
-      setTimeout(() => { btn.textContent = 'この曲をBGMに設定'; }, 1500);
+      // ボタン文言は変更しない
     }
   });
 });
@@ -160,8 +266,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const slideCount = slides.children.length;
   let index = 0;
 
+  /* ==== ドットナビゲーション生成 ==== */
+  const sliderEl = slides.closest('.slider');
+  const dotsWrap = document.createElement('div');
+  dotsWrap.className = 'dots';
+  const dots = [];
+  for(let i=0;i<slideCount;i++){
+    const dot=document.createElement('span');
+    dot.className='dot';
+    if(i===0) dot.classList.add('active');
+    dot.addEventListener('click',()=>{
+      index=i;
+      update();
+    });
+    dotsWrap.appendChild(dot);
+    dots.push(dot);
+  }
+  sliderEl.after(dotsWrap);
+
   function update(){
     slides.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((d,idx)=>d.classList.toggle('active', idx===index));
   }
 
   document.querySelector('.next').addEventListener('click', () => {
@@ -178,4 +303,18 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(() => {
     document.querySelector('.next').click();
   }, 4000);
+});
+
+// ===== 画像クリック → フルサイズ表示 =====
+const imgModal=document.getElementById('imgModal');
+const fullImg=document.getElementById('fullImg');
+const closeImg=document.getElementById('closeImg');
+closeImg?.addEventListener('click',()=>imgModal.close());
+Array.from(document.querySelectorAll('#album .slides img')).forEach(img=>{
+  img.style.cursor='pointer';
+  img.addEventListener('click',()=>{
+    fullImg.src = img.src;
+    fullImg.alt = img.alt || '';
+    imgModal.showModal();
+  });
 });
