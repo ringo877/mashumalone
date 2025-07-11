@@ -57,14 +57,38 @@ function showMain(){
   $('content').hidden = false;
   document.body.classList.add('ready');
 
-  // ヒーローギャラリー & タイトル & メイン 順にフェードイン
-  $('heroGallery')?.classList.replace('hide-before','show-now');
-  $('siteHeader') .classList.replace('hide-before','show-now');
+  // ① タイトル (#siteHeader) を先行表示
+  const headerEl = $('siteHeader');
+  // 次フレームで hide-before → show-now に切り替え（初回ペイントを保証）
+  requestAnimationFrame(()=>{
+    headerEl.classList.replace('hide-before','show-now');
+  });
+
+  // ② 0.6 s 後にヒーロー / アルバムを表示
+  setTimeout(()=>{
+    $('heroGallery')?.classList.replace('hide-before','show-now');
+    $('album')?.classList.replace('hide-before','show-now');
+  },600);
+
+  // ③ 1.2 s 後にメインコンテンツを表示
   setTimeout(()=>{
     $('mainArea').classList.replace('hide-before','show-now');
+    // BGM 再生開始 & BGM ボタン表示
     $('bgm').play()?.catch(()=>{});
     playBtn.style.display='block';
-  },600);
+  },1200);
+
+  /* === アルバムスライダーを初期状態にリセットしてから自動再生を開始 === */
+  const sliderSlides = document.querySelector('.slides');
+  const dots = document.querySelectorAll('.dots .dot');
+  if(sliderSlides){
+    // 画像位置を先頭へ
+    sliderSlides.style.transform = 'translateX(0%)';
+    // ドットの active を先頭に揃える
+    dots.forEach((d,i)=>d.classList.toggle('active', i===0));
+  }
+  // スライダーに開始合図を送る
+  document.dispatchEvent(new Event('site-ready'));
 }
 video.addEventListener('ended', showMain, { once:true });
 skipBtn.addEventListener('click', ()=>{ video.pause(); showMain(); });
@@ -435,9 +459,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* 4 秒ごとに自動再生 */
-  setInterval(() => {
-    document.querySelector('.next').click();
-  }, 4000);
+  let autoId = null;
+  function startAutoPlay(){
+    if(autoId!==null) return; // 二重起動防止
+    // スライド位置をリセット
+    index = 0;
+    update();
+    autoId = setInterval(()=>{
+      document.querySelector('.next').click();
+    },4000);
+  }
+
+  // サイト表示完了後（showMain → site-ready イベント発火）に自動再生を開始
+  document.addEventListener('site-ready', startAutoPlay, { once:true });
 });
 
 // ===== 画像クリック → フルサイズ表示 =====
