@@ -29,9 +29,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     img.decoding = 'async';
   });
 
-  // 音声ファイルはユーザー操作時まで読み込まない
+  // BGM だけはプリロードを維持し、それ以外を none に
   document.querySelectorAll('audio').forEach(aud=>{
-    aud.preload = 'none';
+    if(aud.id!=='bgm'){
+      aud.preload = 'none';
+    }
   });
 
   // 動画も初期読み込みしない
@@ -46,6 +48,20 @@ $('enter').addEventListener('click',async()=>{
   if(await sha256(pw)!==HASH){ $('msg').textContent='パスワードが違います…'; return; }
   $('lock').style.display='none';
   introLayer.style.display='flex';
+
+  /* === Autoplay Unlock: BGM を無音再生してポリシーを解除 === */
+  try{
+    const bgmEl=$('bgm');
+    if(bgmEl.paused){
+      const originalVol=bgmEl.volume;
+      bgmEl.volume=0;
+      await bgmEl.play();
+      bgmEl.pause();
+      bgmEl.currentTime=0;
+      bgmEl.volume=originalVol;
+    }
+  }catch(e){/* silent */}
+
   video.play()?.catch(()=>{});
 });
 
