@@ -5,6 +5,8 @@
 /************* 0. 設定 *************/
 // ↓ ご自分のパスワードを SHA‑256 変換した 64 文字に差し替えてください
 const HASH = '398f64de21a9d7228fc607938bde4f72015cb4aec977e20452356aacfbb13c89';
+// パスワード誤入力回数をカウント
+let pwFailCount = 0;
 
 /************* 1. ユーティリティ *************/
 const $ = id => document.getElementById(id);
@@ -45,7 +47,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 /************* 4. パスワード入力 *************/
 $('enter').addEventListener('click',async()=>{
   const pw=$('pw').value;
-  if(await sha256(pw)!==HASH){ $('msg').textContent='パスワードが違います…'; return; }
+  if(await sha256(pw)!==HASH){
+    pwFailCount++;
+    let msg='パスワードが違います…';
+    if(pwFailCount>=2){ msg+='<br>💡 ヒント：鏡'; }
+    $('msg').innerHTML = msg;
+    return;
+  }
+  // 成功したらカウンタリセット
+  pwFailCount=0;
   $('lock').style.display='none';
   introLayer.style.display='flex';
 
