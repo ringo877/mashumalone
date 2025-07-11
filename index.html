@@ -45,25 +45,16 @@
       <button data-scroll="#video">📽️ お祝いムービー 📽️</button>
     </nav>
     
-    <!-- HERO ギャラリー -->
-    <!-- <section id="heroGallery" class="hero-gallery hide-before photos">
-      <h3>📸 思い出アルバム 📸</h3>
-      <figure>
-        <img src="assets/photos/memory1.jpg" alt="思い出1" class="active">
-        <figcaption>まほが投稿したコンストラクティブスピーチ</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/photos/memory2.jpg" alt="思い出2">
-        <figcaption>旅行で決めポーズをする人々</figcaption>
-      </figure>
-    </section> -->
-
     <section id="album" class="hide-before">
       <h3>📸 思い出アルバム 📸</h3>
       <div class="slider">
         <button class="prev" aria-label="前へ">‹</button>
 
         <ul class="slides">
+          <li>
+            <img src="assets/photos/memory11.jpg" alt="まほちゃん！">
+            <p class="caption">まほちゃん！</p>
+          </li> 
           <li>
             <img src="assets/photos/memory1.jpg" alt="旅行">
             <p class="caption">旅行で決めポーズ！</p>
@@ -182,6 +173,14 @@
             <span>作詞：ゆいかちゃん　作曲：Suno</span>
             <audio controls preload="auto" class="song-audio">
               <source src="assets/songs/violinist.mp3" type="audio/mpeg">
+            </audio>
+            <button class="set-bgm-btn" type="button">この曲をBGMに設定</button>
+          </li>
+          <li>
+            <span class="song-title" data-lyrics-id="donuts">DONUTVS</span>
+            <span>原案：ゆいかちゃん　作詞：ChatGPT　作曲：Suno</span>
+            <audio controls preload="auto" class="song-audio">
+              <source src="assets/songs/donuts.mp3" type="audio/mpeg">
             </audio>
             <button class="set-bgm-btn" type="button">この曲をBGMに設定</button>
           </li>
