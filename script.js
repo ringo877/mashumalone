@@ -63,12 +63,11 @@ $('enter').addEventListener('click',async()=>{
   try{
     const bgmEl=$('bgm');
     if(bgmEl.paused){
-      const originalVol=bgmEl.volume;
-      bgmEl.volume=0;
+      // 音量 0 で再生し続け、モバイルの自動再生制限を解除するだけにとどめる
+      // （pause すると端末によっては音が出てしまうケースがあったため）
+      bgmEl.dataset.prevVol = bgmEl.volume.toString(); // 後で戻すため保存
+      bgmEl.volume = 0;
       await bgmEl.play();
-      bgmEl.pause();
-      bgmEl.currentTime=0;
-      bgmEl.volume=originalVol;
     }
   }catch(e){/* silent */}
 
@@ -99,8 +98,17 @@ function showMain(){
   // ③ 1.2 s 後にメインコンテンツを表示
   setTimeout(()=>{
     $('mainArea').classList.replace('hide-before','show-now');
-    // BGM 再生開始 & BGM ボタン表示
-    $('bgm').play()?.catch(()=>{});
+    // BGM の音量を元に戻し、頭出しして再生開始
+    const bgmEl=$('bgm');
+    try{
+      bgmEl.currentTime = 0;
+      if(bgmEl.volume === 0){
+        const volStr = bgmEl.dataset.prevVol;
+        bgmEl.volume = volStr ? parseFloat(volStr) : 1;
+      }
+      bgmEl.play()?.catch(()=>{});
+    }catch(e){/* silent */}
+    // BGM ボタン表示
     playBtn.style.display='block';
   },1200);
 
